@@ -12,16 +12,19 @@ import { writeToErrLog, writeToLog } from "./utils/logging"; // Removed .js agai
 import { McpServerWithMiddleware } from "./utils/middleware";
 import './utils/exitHandler';
 import { registerDeleteTempOnExit } from "./utils/exitHandler";
+import { getRuntimeConfig } from "./utils/envConfig";
 
 process.on("uncaughtException", (err) => {
 	logError(err);
 	exit(2);
 });
 
-config({ path: path.join(projPath, ".env") });
+const runtimeConfig = getRuntimeConfig(process.argv.slice(2), process.env, projPath);
+
+config({ path: runtimeConfig.envFilePath });
 
 const server = new McpServerWithMiddleware({
-	name: "integration-suite",
+	name: runtimeConfig.serverName,
 	version: "1.0.0",
 }, {
 	capabilities: {
@@ -61,6 +64,6 @@ if (!process.env.JEST_WORKER_ID) {
 			console.error(err);
 			exit(1);
 		})
-		.then(() => writeToLog("server started"));
+		.then(() => writeToLog(`server started with env file ${runtimeConfig.envFileBaseName}`));
 
 }

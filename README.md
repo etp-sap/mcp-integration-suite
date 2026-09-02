@@ -28,10 +28,28 @@ For Claude Desktop: `~/Library/Application\ Support/Claude/claude_desktop_config
         "<project path>/dist/index.js"
       ],
       "autoApprove": []
+    },
+    "mcp-integration-suite-RuJing": {
+      "command": "node",
+      "args": [
+        "<project path>/dist/index.js",
+        "RuJing"
+      ],
+      "autoApprove": []
+    },
+    "mcp-integration-suite-KLT": {
+      "command": "node",
+      "args": [
+        "<project path>/dist/index.js",
+        "KLT"
+      ],
+      "autoApprove": []
     }
   }
 }
 ```
+
+By default, the server loads the project `.env` file. Add one alias argument to load a prefixed environment file, for example `KLT` loads `KLT.env` and uses `integration-suite-KLT` as the MCP server name. The explicit forms `--env <name>` and `--server-name <name>` are still supported when needed.
 
 ## Custom Prompt
 ```
