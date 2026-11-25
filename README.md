@@ -239,6 +239,8 @@ git --version
 
 每个 CPI 租户准备一个别名，例如 `ZB`。建议使用 OAuth Service Key。原始 JSON 可以直接从 BTP 复制，保存为工程根目录的 `<别名>.env.json`，不需要把 JSON 转成 env。
 
+可以先查看 [Service Key JSON 示例](.env.json.example)，了解文件结构。示例只包含占位符，不能直接连接；实际使用时请以目标租户的原始 Service Key 内容替换。该示例不含管理 API 地址，仍需按下文在同名 `.env` 中配置 `API_BASE_URL`。
+
 **Service Key JSON 从哪里获取**（以截图中的 BTP Cockpit 界面为例）：
 
 1. 登录 SAP BTP Cockpit，进入目标 Integration Suite 租户所在的 **Subaccount**。
