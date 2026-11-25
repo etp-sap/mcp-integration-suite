@@ -1,4 +1,8 @@
 *.env
+# Root-level service keys; tracked project configuration remains tracked.
+/*env.json
+!/package.json
+!/tsconfig.json
 dist
 node_modules
 package-lock.json

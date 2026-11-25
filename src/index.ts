@@ -4,7 +4,6 @@ export const projPath = path.resolve(__dirname, "..");
 
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { registerAllHandlers } from "./handlers";
-import { config } from "dotenv";
 
 import { exit } from "process";
 import "./utils/logging"; // Removed .js again
@@ -12,7 +11,7 @@ import { writeToErrLog, writeToLog } from "./utils/logging"; // Removed .js agai
 import { McpServerWithMiddleware } from "./utils/middleware";
 import './utils/exitHandler';
 import { registerDeleteTempOnExit } from "./utils/exitHandler";
-import { getRuntimeConfig } from "./utils/envConfig";
+import { getRuntimeConfig, loadRuntimeCredentials } from "./utils/envConfig";
 
 process.on("uncaughtException", (err) => {
 	logError(err);
@@ -21,7 +20,7 @@ process.on("uncaughtException", (err) => {
 
 const runtimeConfig = getRuntimeConfig(process.argv.slice(2), process.env, projPath);
 
-config({ path: runtimeConfig.envFilePath });
+loadRuntimeCredentials(runtimeConfig.envFilePath);
 
 const server = new McpServerWithMiddleware({
 	name: runtimeConfig.serverName,
